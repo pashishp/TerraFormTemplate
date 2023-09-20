@@ -38,5 +38,5 @@ jobs:
         git add -A
         git commit -m "Setup Terraform Templates" || echo "No changes to commit"
         git push
-        # Use GitHub CLI or some action to create a pull request here. For simplicity, I'm skipping that part.
+        # Use GitHub CLI or some action to create a pull request here. For simplicity, I'm skipping that part. Changed
 

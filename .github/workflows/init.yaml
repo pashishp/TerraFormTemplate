@@ -1,0 +1,3 @@
+template: https://github.com/pashishp/TerraFormTemplate
+parameters:
+  APPNAME: mysupercoolapp

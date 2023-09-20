@@ -29,18 +29,25 @@ jobs:
       run: |
         find . -type f -exec sed -i "s/%%APPNAME%%/${APPNAME}/g" {} +
 
-    - name: Set up Git for Push
-      run: |
-        git config --local user.email "action@github.com"
-        git config --local user.name "GitHub Action"
-        git remote add authenticated-origin https://x-access-token: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@github.com/pashishp/TerraFormTemplate.git
-        git fetch authenticated-origin
+    # - name: Set up Git for Push
+    #   run: |
+    #     git config --local user.email "action@github.com"
+    #     git config --local user.name "GitHub Action"
+    #     # git remote add authenticated-origin https://x-access-token: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@github.com/pashishp/TerraFormTemplate.git
+    #     git fetch authenticated-origin
 
     - name: Commit and push changes
       run: |
+        git config --local user.email "action@github.com"
+        git config --local user.name "GitHub Action"
         git add .
         git commit -m "Setup Terraform Templates" || echo "No changes to commit"
-        git push authenticated-origin HEAD:master
+        git remote set-url origin https://pashishp:${{ secrets.ACCESSTOKEN }}@github.com/TerraFormTemplate.git
+        git checkout master
+        git merge --ff-only @{u}
+        git push
+      env:
+        PAT_TOKEN: ${{ secrets.PAT_TOKEN }} # Assuming you've saved your PAT as `PAT_TOKEN` in GitHub secrets.
 
     # - name: Commit and create PR
     #   run: |

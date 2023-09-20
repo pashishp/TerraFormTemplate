@@ -33,7 +33,7 @@ jobs:
       run: |
         git config --local user.email "action@github.com"
         git config --local user.name "GitHub Action"
-        git remote add authenticated-origin https://x-access-token:${{secrets.ACCESSTOKEN}}@github.com/pashishp/TerraFormTemplate.git
+        git remote add authenticated-origin https://x-access-token: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@github.com/pashishp/TerraFormTemplate.git
         git fetch authenticated-origin
 
     - name: Commit and push changes

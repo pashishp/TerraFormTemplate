@@ -31,7 +31,7 @@ jobs:
 
     - name: Commit and create PR
       run: |
-        git config --local user.email "pashishp2011@gmal.com"
+        git config --local user.email "action@github.com"
         git config --local user.name "GitHub Action"
         git add -A
         git commit -m "Setup Terraform Templates" || echo "No changes to commit"

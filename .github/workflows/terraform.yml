@@ -2,8 +2,8 @@ name: Setup Terraform Templates
 
 on:
   push:
-    paths:
-      - 'init.yaml'
+    branches: [ "master" ]
+  pull_request:
 
 jobs:
   setup:

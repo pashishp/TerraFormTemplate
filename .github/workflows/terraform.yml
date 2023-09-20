@@ -31,10 +31,10 @@ jobs:
 
     - name: Commit and create PR
       run: |
-        git config --local user.email "action@github.com"
-        git config --local user.name "GitHub Action"
+        git config --local user.email "pashishp2011@gmail.com"
+        git config --local user.name "pashishp"
         git add -A
         git commit -m "Setup Terraform Templates" || echo "No changes to commit"
-        git push
+        git push https://${{ secrets.ACCESSTOKEN }}@github.com/pashishp/TerraFormTemplate.git HEAD:main
         # Use GitHub CLI or some action to create a pull request here. For simplicity, I'm skipping that part.
 

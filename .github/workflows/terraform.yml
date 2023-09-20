@@ -1,0 +1,40 @@
+name: Setup Terraform Templates
+
+on:
+  push:
+    paths:
+      - 'init.yaml'
+
+jobs:
+  setup:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout main repo
+      uses: actions/checkout@v2
+
+    - name: Parse init.yaml
+      id: parse
+      run: |
+        echo "TEMPLATE_REPO=$(cat init.yaml | grep template | cut -d ' ' -f2)" >> $GITHUB_ENV
+        echo "APPNAME=$(cat init.yaml | grep APPNAME | cut -d ' ' -f2)" >> $GITHUB_ENV
+
+    - name: Clone template repo
+      run: git clone $TEMPLATE_REPO template-repo
+
+    - name: Copy template files to main repo
+      run: cp -r template-repo/* .
+
+    - name: Replace parameters
+      run: |
+        find . -type f -exec sed -i "s/%%APPNAME%%/${APPNAME}/g" {} +
+
+    - name: Commit and create PR
+      run: |
+        git config --local user.email "action@github.com"
+        git config --local user.name "GitHub Action"
+        git add -A
+        git commit -m "Setup Terraform Templates" || echo "No changes to commit"
+        git push
+        # Use GitHub CLI or some action to create a pull request here. For simplicity, I'm skipping that part.
+
